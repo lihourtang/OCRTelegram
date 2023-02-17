@@ -190,21 +190,31 @@
                 x.style.display = "none";
                 var y = document.getElementById("loaderSpin");
                 y.style.display = "block";
-                await fetch("https://pcla-payway-hc6oexyfvq-as.a.run.app/generateQR", {
-                    method: 'GET',
-                }).then((response) => response.json())
-                    .then((data) => {
-                        console.log(data)
-                        paymentLink = data['paymentLink']
-                        uniquePaymentID = data['paymentId']
-                    })
-                window.Telegram.WebApp.sendData(JSON.stringify({ uPaymentID: uniquePaymentID,
-                    uPaymentLink: paymentLink}))
+                // await fetch("https://pcla-payway-hc6oexyfvq-as.a.run.app/generateQR", {
+                //     method: 'GET',
+                // }).then((response) => response.json())
+                //     .then((data) => {
+                //         console.log(data)
+                //         paymentLink = data['paymentLink']
+                //         uniquePaymentID = data['paymentId']
+                //     })
+                // window.Telegram.WebApp.sendData(JSON.stringify({ uPaymentID: uniquePaymentID,
+                //     uPaymentLink: paymentLink}))
+                //     mainButton.close()
+                setTimeout(function () {
+                    window.Telegram.WebApp.sendData(JSON.stringify({
+                        firstN: firstName,
+                        lasyN: lastName,
+                        ID: NID,
+                        birthDate: DOB,
+                        ad: address
+                    }))
                     mainButton.close()
+                }, 3000);
 
-                })
-            }
-        
+            })
+        }
+
 
         async function nextToPaymendone() {
             var y = document.getElementById("loaderSpin");
